@@ -371,15 +371,13 @@ contains
     integer, intent(in)          :: nVarLineIn, nPointLineIn
     real,    intent(in)          :: BufferLine_VI(nVarLineIn,nPointLineIn)
     character(len=*), intent(in) :: NameVar
-    character(len=*), parameter  :: NameSub='IM_put_from_gm_line'
     character(len=100)           :: NameFile
-    logical                      :: DoTest, DoTestMe
     !\
     ! These variables should either be in a module, OR
     ! there is no need for them, and BufferLine_VI should be put 
     ! into HEIDI variables right here. 
     ! Note that this routine is only called on the root processor !!!
-    !/8
+    !/
 
     integer          :: nVarLine   = 0    ! number of vars per line point
     integer          :: nPointLine = 0    ! number of points in all lines
@@ -419,12 +417,17 @@ contains
     real                            :: xS, yS, zS, xN, yN, zN
     real                            :: LengthExS(nR,nT,2), LengthExN(nR,nT,2)
     real                            :: Re, DipoleFactor
+
+
+    logical                      :: DoTest, DoTestMe
+    character(len=*), parameter  :: NameSub='IM_put_from_gm_line'
     !--------------------------------------------------------------------------
+    call CON_set_do_test(NameSub, DoTest, DoTestMe)
+    DoTestMe = DoTest .and. iProc == 0
+
     Re = rPlanet_I(Earth_)
     DipoleFactor = DipoleStrengthPlanet_I(Earth_)*(Re)**3
 
-    call CON_set_do_test(NameSub, DoTest, DoTestMe)
-    DoTestMe = DoTest .and. iProc == 0
     !\
     ! Save total number of points along all field lines
     !/
@@ -447,9 +450,10 @@ contains
        write(NameFile,'(a,i5.5,a)') &
             "IM/plots/ray_data_t",nint(Time),".out"
        open(UnitTmp_, FILE=NameFile, STATUS="replace")
-       ! Same format as in GM/BATSRUS/src/ray_trace_new.f90
+       ! Same format as in GM/BATSRUS/src/ModTraceField.f90
        write(UnitTmp_, *) 'nRadius, nLon, nPoint=',nR, nT, nPointLine
-       write(UnitTmp_, *) 'iLine l x y z rho ux uy uz bx by bz p bgradb1x bgradb1y bgradb1z'
+       write(UnitTmp_, *) 'iLine l x y z rho ux uy uz bx by bz p '// &
+            'bgradb1x bgradb1y bgradb1z Ex Ey Ez Epotx Epoty Epotz'
        do iPoint = 1, nPointLine
           write(UnitTmp_, *) StateLine_VI(:, iPoint)
        end do
