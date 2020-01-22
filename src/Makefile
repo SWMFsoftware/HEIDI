@@ -12,7 +12,6 @@ SEARCHDIR = -I${SHAREDIR} -I${DATAREADINDICESDIR} -I${EMPIRICALIEDIR}
 
 include ../Makefile.conf
 -include Makefile.DEPEND
-
 -include Makefile.RULES
 
 OBJECTS = \
@@ -94,7 +93,6 @@ ${EXE}: ${EXEOBJECTS}
 clean: cleanfiles
 
 distclean: clean
-	rm -f Makefile.DEPEND Makefile.RULES
 
 
 
