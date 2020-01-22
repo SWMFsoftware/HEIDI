@@ -11,9 +11,9 @@ include ../Makefile.def
 SEARCHDIR = -I${SHAREDIR} -I${DATAREADINDICESDIR} -I${EMPIRICALIEDIR}
 
 include ../Makefile.conf
-include Makefile.DEPEND
+-include Makefile.DEPEND
 
-include Makefile.RULES
+-include Makefile.RULES
 
 OBJECTS = \
 	ModHeidiSize.o\
