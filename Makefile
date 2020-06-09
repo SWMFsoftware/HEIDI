@@ -31,6 +31,8 @@ CHECKDIR  = output
 SADIR     = run_heidi
 
 
+.NOTPARALLEL: test
+
 test:
 	@rm -f *.diff
 	-@(make test_analytic)	
