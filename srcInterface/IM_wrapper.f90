@@ -1114,30 +1114,32 @@ contains
   end subroutine interpolate_linear_b
 
   !============================================================================
-  real function lagrange(lHeidi, lMhd_I, bMhd_I, nStepMHD, nOrder)
+  real function lagrange(lHeidi, lMhd_I, bMhd_I, nStepMHD, nOrderIn)
 
     real    :: lHeidi ! find the value of B at this point along the fiedl line
     integer :: nStepMHD         ! number of points along the MHD field line
     real    :: lMhd_I(nStepMHD) ! field line length values from MHD
     real    :: bMhd_I(nStepMHD) ! magnetic fiedl values from MHD
-    integer :: nOrder              ! order of interpolation
+    integer :: nOrderIn         ! requested order of interpolation
+
+
     real    :: func_I(nStepMHD)
-    integer :: i, j, k, l, m
+    integer :: i, j, k, l, m, nOrder
     real    :: y
 
     !-------------------------------------------------------------------------
     ! Check if the size of the array is larger than the order of interpolation 
-    !if (nOrder > nStepMHD)  nOrder = nStepMHD
+    nOrder = min(nOrderIn, nStepMHD)
 
     ! Check if lHeidi is outside the lMhd(1)-lMhd(nStepMHD) interval. 
     ! If yes set a boundary value.
     if (lHeidi <= lMhd_I(1)) then
        lagrange = bMhd_I(1)
-       return
+       RETURN
     end if
     if (lHeidi >= lMhd_I(nStepMHD)) then
        lagrange = bMhd_I(nStepMHD)
-       return
+       RETURN
     end if
 
     ! Search to find i so that lMhd(i) < lHeidi < lMhd(i+1)

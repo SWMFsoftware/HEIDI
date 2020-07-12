@@ -5,7 +5,7 @@ SHELL =/bin/sh
 
 include ../Makefile.def
 include ../Makefile.conf
-include Makefile.DEPEND
+-include Makefile.DEPEND
 
 # Configurable objects
 
@@ -38,5 +38,4 @@ ${MY_LIB}: ${HEIDI_LIB} ${OBJECTS}
 clean: cleanfiles
 
 distclean: clean
-	rm -f Makefile.DEPEND
 

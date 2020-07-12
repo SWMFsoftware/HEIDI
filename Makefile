@@ -4,15 +4,9 @@ default: HEIDI
 
 include Makefile.def
 
-INSTALLFILES =  src/Makefile.DEPEND \
-		src/Makefile.RULES \
-		srcInterface/Makefile.DEPEND
-
 install: 
-	touch ${INSTALLFILES}
 
-
-HEIDI:  install
+HEIDI:
 	@cd ${SHAREDIR};  	make LIB
 	@cd ${NOMPIDIR};	make LIB
 	@cd ${TIMINGDIR}; 	make LIB 
@@ -20,7 +14,7 @@ HEIDI:  install
 	@cd ${EMPIRICALGMDIR};	make LIB
 	@cd src;	        make HEIDI
 
-LIB:  install
+LIB:
 	@cd ${SHAREDIR};  	make LIB
 	@cd ${NOMPIDIR};	make LIB
 	@cd ${TIMINGDIR}; 	make LIB 
@@ -36,6 +30,8 @@ HEIDIDIR  = ${DIR}/IM/HEIDI
 CHECKDIR  = output
 SADIR     = run_heidi
 
+
+.NOTPARALLEL: test
 
 test:
 	@rm -f *.diff
@@ -125,7 +121,7 @@ rundir:
 	cd ${RUNDIR}/IM/restartIN; \
 		cp ${HEIDIDIR}/data/input/*.gz .; gunzip *.gz
 
-clean: install
+clean:
 	@(if [ -r "Makefile.conf" ]; then  \
 		cd src;             make clean;\
 		cd ../srcInterface; make clean;\
@@ -134,7 +130,7 @@ clean: install
 distclean: 
 	./Config.pl -uninstall
 
-allclean: install
+allclean:
 	@(if [ -r "Makefile.conf" ]; then \
 		cd src;             make distclean;\
 		cd ../srcInterface; make distclean;\
