@@ -446,18 +446,15 @@ The TypeBFieldGrid parameter sets up the kind of field line grid. For uniform gr
 </command>
 
 <command name="SAVERESTART">
-	parameter name="TypeFile" type="string" input="select" case="lower">
-		<option name="ascii"                     default="ascii"  />
-		<option name="real4" />	
-		<option name="real8" />	
-	<parameter name="DoSaveRestart" type="logical" default="T" />
-	<if expr="$DoSaveRestart">
-		<parameter name="DtSaveRestart" type="real"    min="-1" 
-							default="40." />
-	</if>
-
-
-
+  <parameter name="DoSaveRestart" type="logical" default="T" />
+  <if expr="$DoSaveRestart">
+    <parameter name="DtSaveRestart" type="real" min="-1" default="40"/>
+    <parameter name="TypeFile" type="string" input="select" case="lower" input="select">
+      <option name="ascii" default="T"  />
+      <option name="real4" />	
+      <option name="real8" />
+    </parameter>
+  </if>
 
 #SAVERESTART
 T			DoSaveRestart
