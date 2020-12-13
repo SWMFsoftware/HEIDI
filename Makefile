@@ -36,8 +36,6 @@ SADIR     = run_heidi
 test:
 	@rm -f *.diff
 	-@(make test_analytic)	
-	-@(make test_numeric)
-
 
 test_analytic:
 	@echo "test_compile..." > test_analytic.diff
