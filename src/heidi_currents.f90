@@ -373,6 +373,7 @@ subroutine CURRENTCALC
        iRad, rnht
   use ModHeidiMain,     ONLY: Re, dPhi
   use ModHeidiIO,       ONLY: iLmp
+  use ModUtilities, ONLY: CON_stop
 
   implicit none
 

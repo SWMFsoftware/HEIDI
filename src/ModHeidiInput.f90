@@ -4,7 +4,7 @@ module ModHeidiInput
 
   use ModReadParam, ONLY: read_file, read_init, i_session_read, &
        read_line, read_command, read_var
-  use ModUtilities, ONLY: split_string
+  use ModUtilities, ONLY: split_string, CON_stop
 
   implicit none
 

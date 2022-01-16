@@ -6,6 +6,8 @@ module IM_wrapper
 
   ! Wrapper for HEIDI Internal Magnetosphere (IM) component
 
+  use ModUtilities, ONLY: CON_stop, CON_set_do_test
+
   implicit none
 
   private ! except

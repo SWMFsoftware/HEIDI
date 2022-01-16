@@ -38,6 +38,7 @@ subroutine FCHECK(MARK)
   use ModHeidiSize, ONLY: io, lo, jo, ko, nS, sCalc
   use ModHeidiMain, ONLY: F2, T, A
   use ModHeidiIo,   ONLY: write_prefix, iUnitStdOut
+  use ModUtilities, ONLY: CON_stop
 
   implicit none
 

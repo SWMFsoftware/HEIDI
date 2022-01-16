@@ -243,6 +243,7 @@ subroutine ARRAYS
   use ModPlotFile,   ONLY: save_plot_file
   use ModHeidiInput, ONLY: TypeBCalc
   use ModNumConst,   ONLY: cPi, cRadToDeg
+  use ModUtilities, ONLY: CON_stop
 
   implicit none
 
