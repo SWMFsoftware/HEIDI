@@ -11,12 +11,13 @@
 
 <command name="STARTTIME" alias="SETREALTIME" 
 				if="$_IsFirstSession and $_IsStandAlone">
-	<parameter name="iYear"   type="integer"                  default="2002" />
-	<parameter name="iMonth"  type="integer" min="1" max="12" default="4"/>
-	<parameter name="iDay"    type="integer" min="1" max="31" default="17"/>
-	<parameter name="iHour"   type="integer" min="0" max="23" default="0"/>
-	<parameter name="iMinute" type="integer" min="0" max="59" default="0"/>
-	<parameter name="iSecond" type="integer" min="0" max="59" default="0"/>
+  <parameter name="iYear"   type="integer"                  default="2002" />
+  <parameter name="iMonth"  type="integer" min="1" max="12" default="4"/>
+  <parameter name="iDay"    type="integer" min="1" max="31" default="17"/>
+  <parameter name="iHour"   type="integer" min="0" max="23" default="0"/>
+  <parameter name="iMinute" type="integer" min="0" max="59" default="0"/>
+  <parameter name="iSecond" type="integer" min="0" max="59" default="0"/>
+
 #STARTTIME
 2002                    iYear
 4                       iMonth
@@ -176,19 +177,19 @@ ApIndex is the ApIndex index and SunspotAverage indicates the 13 month sunspot a
 </command>
 
 <command name="BOUNDARY" >
-	<parameter name="TypeBoundary" type="string" input="select" case="lower">
-		<option name="none"                          value="0/none"  />		
-		<option name="Maxwellian"                    value="1/maxwellian"  />
-		<option name="Gaussian"                      value="2/gaussian"  />
-		<option name="FromInputFile"                 value="3/frominputfile"  />
-		<option name="QuietRC"                       value="4/quietrc"  />
-		<option name="FromFile"                      value="5/fromfile"  />
-		<option name="PSInject"                      value="6/psinject"  />
-		<option name="FromRestart"                   value="7/fromrestart"  />
-	</parameter>	
+  <parameter name="TypeBoundary" type="string" input="select" case="lower">
+    <option name="none"           value="0/none"  default="T"/>
+    <option name="Maxwellian"     value="1/maxwellian"/>
+    <option name="Gaussian"       value="2/gaussian"/>
+    <option name="FromInputFile"  value="3/frominputfile"/>
+    <option name="QuietRC"        value="4/quietrc"/>
+    <option name="FromFile"       value="5/fromfile"/>
+    <option name="PSInject"       value="6/psinject"/>
+    <option name="FromRestart"    value="7/fromrestart"/>
+  </parameter>
 	
 #BOUNDARY
-0		TypeBoundary
+none		TypeBoundary
 
 The #BOUNDARY command indicates which boundary conditions to use (to match to initial boundary conditions)
 \begin{verbatim}
@@ -205,19 +206,22 @@ The #BOUNDARY command indicates which boundary conditions to use (to match to in
 </command>
 
 <command name="INITIAL" >
-	<parameter name="TypeInitial" type="string" input="select" case="lower">
-		<option name="none"                          value="0/none"  />		
-		<option name="Maxwellian"                    value="1/maxwellian"  />
-		<option name="Gaussian"                      value="2/gaussian"  />
-		<option name="FromInputFile"                 value="3/frominputfile"  />
-		<option name="QuietRC"                       value="4/quietrc"  />
-		<option name="FromFile"                      value="5/fromfile"  />
-		<option name="PSInject"                      value="6/psinject"  />
-		<option name="FromRestart"                   value="7/fromrestart"  />
-	</parameter>
+  <parameter name="TypeInitial" type="string" input="select" case="lower">
+    <option name="none"            value="0/none"        default="T"/>
+    <option name="Maxwellian"      value="1/maxwellian"/>
+    <option name="Gaussian"        value="2/gaussian"/>
+    <option name="FromInputFile"   value="3/frominputfile"/>
+    <option name="QuietRC"         value="4/quietrc"/>
+    <option name="FromFile"        value="5/fromfile"/>
+    <option name="PSInject"        value="6/psinject"/>
+    <option name="FromRestart"     value="7/fromrestart"/>
+    <option name="FromMHD"         value="8/frommhd"/>
+  </parameter>
+  <parameter name="MaxwellianScallingFactor" type="real"/>
+  <parameter name="CharacteristicEnergy" type="real"/>
 	
 #INITIAL
-0			TypeInitial
+none			TypeInitial
 0.0			MaxwellianScallingFactor
 0.03			CharacteristicEnergy
 
@@ -233,29 +237,31 @@ The TypeInitial parameter indicates which initial conditions to use (to match to
 7 - Read from .unff file. Use to reastart.
 \end{verbatim}
 
-MaxwellianScallingFactor is the scalling factor for Maxwellian initial distribution. CharacteristicEnergy is the characteristic energy for Initial*=1 (keV)
+MaxwellianScallingFactor is the scalling factor for Maxwellian initial
+distribution. CharacteristicEnergy is the characteristic energy for
+initial state in (keV).
 
+The default is TypeInitial=none.
 
 </command>
 
 <command name="OUTPUT" >
-	<parameter name="DoSaveDistributionFunctionEverywhere" type="logical"  default="T"/>
-	<parameter name="DoSaveEquatorialDistributionFunction" type="logical"  default="F"/>	
-	<parameter name="DoSaveEnergyDeposition"               type="logical"  default="T"/>	
-	<parameter name="DoSaveTotalPrecipitationFlux"         type="logical"  default="F"/>
-	<parameter name="DoSaveDifferentialPrecipitationFlux"  type="logical"  default="F"/>
-	<parameter name="DoSaveParticleEnergyLosses"           type="logical"  default="F"/>
-	<parameter name="DoSaveThermalPlasmaDensity"           type="logical"  default="T"/>
-	<parameter name="DoSaveCflForAdvection"                type="logical"  default="F"/>
-	<parameter name="DoSaveDriftVelocities"                type="logical"  default="T"/>
-	<parameter name="DoSaveEvsLDistributions"              type="logical"  default="F"/>
-	<parameter name="DoSaveParticleLifetimes"              type="logical"  default="F"/>
-	<parameter name="DoSavePressureDensityDst"             type="logical"  default="T"/>
-	<parameter name="DoSaveUnformatted"                    type="logical"  default="T"/>
-	<parameter name="DoSaveContinuousSourcesLosses"        type="logical"  default="T"/>
-	<parameter name="DoSaveNightsideBCDistribution"        type="logical"  default="T"/>
-	<parameter name="DoSaveDifferentialNumberFlux"     type="logical"  default="F"/>
-		
+  <parameter name="DoSaveDistributionFunctionEverywhere" type="logical" default="T"/>
+  <parameter name="DoSaveEquatorialDistributionFunction" type="logical" default="F"/>
+  <parameter name="DoSaveEnergyDeposition"               type="logical" default="T"/>
+  <parameter name="DoSaveTotalPrecipitationFlux"         type="logical" default="F"/>
+  <parameter name="DoSaveDifferentialPrecipitationFlux"  type="logical" default="F"/>
+  <parameter name="DoSaveParticleEnergyLosses"           type="logical" default="F"/>
+  <parameter name="DoSaveThermalPlasmaDensity"           type="logical" default="T"/>
+  <parameter name="DoSaveCflForAdvection"                type="logical" default="F"/>
+  <parameter name="DoSaveDriftVelocities"                type="logical" default="T"/>
+  <parameter name="DoSaveEvsLDistributions"              type="logical" default="F"/>
+  <parameter name="DoSaveParticleLifetimes"              type="logical" default="F"/>
+  <parameter name="DoSavePressureDensityDst"             type="logical" default="T"/>
+  <parameter name="DoSaveUnformatted"                    type="logical" default="T"/>
+  <parameter name="DoSaveContinuousSourcesLosses"        type="logical" default="T"/>
+  <parameter name="DoSaveNightsideBCDistribution"        type="logical" default="T"/>
+  <parameter name="DoSaveDifferentialNumberFlux"         type="logical" default="F"/>
 
 #OUTPUT
 T			DoSaveDistributionFunctionEverywhere	
@@ -299,8 +305,8 @@ Set DoSaveDifferentialNumberFlux to false to save the distribution function as o
 </command>
 
 <command name="OUTPUTINFO" >
-	<parameter name="NameRun" type="string" length="10" />
-	<parameter name="nFrequency" type="real" />
+  <parameter name="NameRun" type="string" length="10" />
+  <parameter name="nFrequency" type="real" />
 		
 #OUTPUTINFO
 99266			NameRun
@@ -314,42 +320,41 @@ oFrequency represents the frequency the output is saved.
 </command>
 
 <command name="INJECTIONFREQUENCY" >
-	<parameter name="iFrequency" type="real" />
+  <parameter name="iFrequency" type="real" />
 		
 #INJECTIONFREQUENCY
 120.			iFrequency [sec]
 
 
-The #INJECTIONFREQUENCY indicates the time interval between injection BC updates (inject if greater than 0)
-
+The #INJECTIONFREQUENCY indicates the time interval between injection
+BC updates (inject if greater than 0)
 
 </command>
 
 <command name="CONVECTION" >
-	<parameter name="TypeConvection" type="string" input="select" case="lower">
-		<option name="none"                         value="0/none"  />
-		<option name="KpVSMaynardChen"              value="1/kpmay"  />	
-		<option name="MBIVS"                        value="2/mbivs "  />	
-		<option name="McIlwain"                     value="3/mcilwain "  />
-		<option name="McIlwainPlusCPCP"             value="4/mcilwainpluscpcp "  />
-		<option name="KpVSPlusBurkeWygant"          value="5/kpvsplusburkewygant "  />
-		<option name="McIlwainPlusBurkeWygant"      value="6/mcilwainplusburkewygant "  />
-		<option name="McIlwainCPCPBurkeWygant"      value="7/mcilwaincpcpburkewygant "  />
-		<option name="KpVSSelfConsintent"           value="8/kpvsselfconsintent "  />
-		<option name="McIlwainSelfConsistent"       value="9/mcilwainselfconsistent "  />
-		<option name="McIlwainCPCPSelfConsistent"   value="10/mcilwaincpcpselfconsistent "  />
-		<option name="UnshieldedVSwithPen"          value="11/unshieldedvswithpen "  />
-		<option name="UnshieldedVSnoPen"            value="12/unshieldedvsnopen "  />
-		<option name="W96SC"                        value="13/w96sc "  />
-		<option name="W96"                          value="14/w96 "  default="T" />
-		<option name="AMIESC"                       value="15/amiesc "  />
-		<option name="AMIE"                         value="16/amie "  />
-		<option name="ReadFromFile"                 value="20/readfromfile "  />
-		<option name="AMIEPot"                      value="21/amiepot "  />
-		<option name="W96Pot"                       value="22/w96pot "  />
-		<option name="Foster"                       value="23/foster"  />
-	</parameter>
-
+  <parameter name="TypeConvection" type="string" input="select" case="lower">
+    <option name="none"                       value="0/none"/>
+    <option name="KpVSMaynardChen"            value="1/kpmay"/>	
+    <option name="MBIVS"                      value="2/mbivs"/>	
+    <option name="McIlwain"                   value="3/mcilwain"/>
+    <option name="McIlwainPlusCPCP"           value="4/mcilwainpluscpcp"/>
+    <option name="KpVSPlusBurkeWygant"        value="5/kpvsplusburkewygant"/>
+    <option name="McIlwainPlusBurkeWygant"    value="6/mcilwainplusburkewygant"/>
+    <option name="McIlwainCPCPBurkeWygant"    value="7/mcilwaincpcpburkewygant"/>
+    <option name="KpVSSelfConsintent"         value="8/kpvsselfconsintent"/>
+    <option name="McIlwainSelfConsistent"     value="9/mcilwainselfconsistent"/>
+    <option name="McIlwainCPCPSelfConsistent" value="10/mcilwaincpcpselfconsistent"/>
+    <option name="UnshieldedVSwithPen"        value="11/unshieldedvswithpen"/>
+    <option name="UnshieldedVSnoPen"          value="12/unshieldedvsnopen"/>
+    <option name="W96SC"                      value="13/w96sc"/>
+    <option name="W96"                        value="14/w96"  default="T"/>
+    <option name="AMIESC"                     value="15/amiesc"/>
+    <option name="AMIE"                       value="16/amie"/>
+    <option name="ReadFromFile"               value="20/readfromfile"/>
+    <option name="AMIEPot"                    value="21/amiepot"/>
+    <option name="W96Pot"                     value="22/w96pot"/>
+    <option name="Foster"                     value="23/foster"/>
+  </parameter>
 
 #CONVECTION
 w96			TypeConvection
@@ -380,10 +385,12 @@ W96Pot			   - Weimer-96 potentials everywhere
 Foster			   - Foster potentials everywhere
 \end{verbatim}
 
+Default value is shown by the example.
+
 </command>
 
 <command name="INITIALTHERMALPLASMA" >
-	<parameter name="DoReadDGCPM" type="logical" default="T"/>	
+  <parameter name="DoReadDGCPM" type="logical" default="T"/>	
 
 #INITIALTHERMALPLASMA
 F		 DoReadDGCPM	
@@ -403,7 +410,7 @@ T		 DoReadSolarWind
 If set to 'True', read solar wind input file.
 
 <command name="PITCHANGLE" >
-	<parameter name="UseConstantStepPA" type="logical"  default="F"/>
+  <parameter name="UseConstantStepPA" type="logical"  default="F"/>
 	
 
 #PITCHANGLE
@@ -414,7 +421,7 @@ Only one of the options can be true at the same time. UseConstantStepPA sets con
 </command>
 
 <command name="INCLUDEWAVES" >
-	<parameter name="UseWaves" type="logical" default="F"/>
+  <parameter name="UseWaves" type="logical" default="F"/>
 
 
 #INCLUDEWAVES
@@ -424,17 +431,16 @@ Set to true if self-consistent wave-particle interactions are to be included.
 
 </command>
 
-
 <command name="BFIELD" >
-	<parameter name="TypeBField" type="string" input="select" case="lower">
-		<option name="analyticdipole"   value="0/analytic"  />
-		<option name="numericaldipole"  value="1/numeric"  />
-	</parameter>
-	<parameter name="TypeBFieldGrid" type="string" input="select" case="lower">	
-		<option name="uniformgrid"      value="0/uniform"  />
-		<option name="nonuniformgrid"   value="1/nonuniform"  />
-		<option name="MHDgrid"   value="mhd" />
-	</parameter>
+  <parameter name="TypeBField" type="string" input="select" case="lower">
+    <option name="analyticdipole"   value="0/analytic"  />
+    <option name="numericaldipole"  value="1/numeric"  />
+  </parameter>
+  <parameter name="TypeBFieldGrid" type="string" input="select" case="lower">	
+    <option name="uniformgrid"      value="0/uniform"  />
+    <option name="nonuniformgrid"   value="1/nonuniform"  />
+    <option name="MHDgrid"   value="mhd" />
+  </parameter>
 
 #BFIELD
 analytic		TypeBField
