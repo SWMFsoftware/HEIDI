@@ -53,7 +53,7 @@ module ModHeidiInput
   ! "#BOUNDARY"
   character(len=100) :: TypeBoundary
   ! "#INITIAL"
-  character(len=100) :: TypeInitial
+  character(len=100) :: TypeInitial = "none"
   real :: MaxwellianScallingFactor
   real :: CharacteristicEnergy
   ! "#OUTPUT"
