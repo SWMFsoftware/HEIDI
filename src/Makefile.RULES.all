@@ -1,3 +1,6 @@
-# nothing so far.
-
+$Compiler eq "nagfor" and $Debug eq "yes"
+	${COMPILE.f90} ${Cflag0} HModel.f90
+	${COMPILE.f90} ${Cflag0} heidi_integrals.f90
+	${COMPILE.f90} ${Cflag0} heidi_icbc.f90
+	${COMPILE.f90} ${Cflag0} heidi_operators.f90
 	
