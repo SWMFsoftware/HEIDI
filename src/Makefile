@@ -87,7 +87,7 @@ ${EXE}: ${EXEOBJECTS}
 		ar -x ${LIBDIR}/libINDICES.a; \
 		ar -x ${LIBDIR}/libSHARE.a;\
 		ar -x ${LIBDIR}/libTIMING.a
-	${LINK.f90}  -o ${EXE} ${EXEOBJECTS} Tmp_/*.o ${LBLAS} ${Lflag1}
+	${LINK.f90}  -o ${EXE} ${EXEOBJECTS} Tmp_/*.o ${LBLAS} ${LflagMpi}
 	rm -rf Tmp_
 
 clean: cleanfiles
