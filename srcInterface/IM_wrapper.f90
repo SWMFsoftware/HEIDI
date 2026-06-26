@@ -21,6 +21,7 @@ module IM_wrapper
   ! Coupling with IE
   public:: IM_get_info_for_ie
   public:: IM_get_for_ie
+  public:: IM_get_for_ie_mpi
   public:: IM_put_from_ie_mpi
   public:: IM_put_from_ie
   public:: IM_put_from_ie_complete
@@ -234,6 +235,16 @@ contains
 
   end subroutine IM_get_for_ie
 
+  !============================================================================
+  subroutine IM_get_for_ie_mpi(nTheta, nPhi, Buffer_IIV, &
+                                              nVarImIe, NameVarImIe_V)
+
+    integer, intent(in) :: nTheta, nPhi, nVarImIe
+    real, intent(out) :: Buffer_IIV(nTheta, nPhi, nVarImIe)
+    character(len=3), intent(out) :: NameVarImIe_V(nVarImIe)
+    !-------------------------------------------------------------------------
+   call CON_stop(NameSub//': IM_get_info_for_ie cannot be used with HEIDI')
+  end subroutine IM_get_for_ie_mpi
   !============================================================================
   subroutine IM_put_from_ie_mpi(nTheta, nPhi, Potential_II)
 
