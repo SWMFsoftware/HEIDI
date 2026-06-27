@@ -239,6 +239,8 @@ contains
   subroutine IM_get_for_ie_mpi(nTheta, nPhi, Buffer_IIV, &
                                               nVarImIe, NameVarImIe_V)
 
+    character(len=*), parameter   :: NameSub='IM_get_for_ie_mpi'
+
     integer, intent(in) :: nTheta, nPhi, nVarImIe
     real, intent(out) :: Buffer_IIV(nTheta, nPhi, nVarImIe)
     character(len=3), intent(out) :: NameVarImIe_V(nVarImIe)
